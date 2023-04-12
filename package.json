@@ -28,6 +28,8 @@
   "dependencies": {
     "eslint-config-prettier": "^8.7.0",
     "flowbite": "^1.6.4",
+    "js-cookie": "^3.0.1",
+    "navigo": "^8.11.1",
     "swiper": "^9.2.0",
     "vite-jsconfig-paths": "^2.0.1"
   }

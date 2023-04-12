@@ -2,7 +2,14 @@
 module.exports = {
   content: ['./index.html', './src/**/*.js', './main.js'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Inter: 'Inter',
+      },
+      colors: {
+        redLight: '#ff0000',
+      },
+    },
   },
   plugins: [],
 };

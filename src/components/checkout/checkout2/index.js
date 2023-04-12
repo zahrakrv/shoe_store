@@ -93,6 +93,7 @@ const shippingAddress = () => {
               El({
                 element: 'input',
                 type: 'radio',
+                name: 'address',
                 // className: 'after:bg-black',
               }),
               El({
@@ -164,6 +165,8 @@ const shippingAddress = () => {
               El({
                 element: 'input',
                 type: 'radio',
+                name: 'address',
+
                 // className: 'after:bg-black',
               }),
               El({
@@ -235,6 +238,8 @@ const shippingAddress = () => {
               El({
                 element: 'input',
                 type: 'radio',
+                name: 'address',
+
                 // className: 'after:bg-black',
               }),
               El({
@@ -306,6 +311,8 @@ const shippingAddress = () => {
               El({
                 element: 'input',
                 type: 'radio',
+                name: 'address',
+
                 // className: 'after:bg-black',
               }),
               El({
