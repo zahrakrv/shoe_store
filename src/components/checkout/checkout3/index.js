@@ -1,4 +1,5 @@
 import El from '@/library/index.js';
+import routerFunction from '@/router';
 const chooseShipping = () => {
   return El({
     element: 'div',
@@ -16,6 +17,9 @@ const chooseShipping = () => {
                 element: 'ion-icon',
                 name: 'arrow-back',
                 className: 'text-3xl',
+                onclick: () => {
+                  routerFunction().navigate('/checkout');
+                },
               }),
               El({
                 element: 'h1',

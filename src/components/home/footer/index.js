@@ -1,11 +1,12 @@
 import El from '@/library/index.js';
+import routerFunction from '@/router';
 
 const footer = () => {
   const icons = [
-    { name: 'home-outline', text: 'Home' },
-    { name: 'bag-outline', text: 'Cart' },
-    { name: 'cart-outline', text: 'Orders' },
-    { name: 'wallet-outline', text: 'Wallet' },
+    { name: 'home-outline', text: 'Home', route: '/home' },
+    { name: 'bag-outline', text: 'Cart', route: '/cart' },
+    { name: 'cart-outline', text: 'Orders', route: '/myorders' },
+    { name: 'wallet-outline', text: 'Wallet', route: '/checkout' },
     { name: 'person-outline', text: 'Profile' },
   ];
 
@@ -16,6 +17,9 @@ const footer = () => {
       child: [
         El({
           element: 'button',
+          onclick: () => {
+            routerFunction().navigate(`${icon.route}`);
+          },
           child: El({
             element: 'ion-icon',
             className: 'text-3xl',

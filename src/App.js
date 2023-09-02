@@ -1,5 +1,5 @@
 import El from '@/library/index.js';
-// import onBoarding from '@/library/onBoarding';
+// import onBoarding from '@/components/onboarding/index';
 // import firstPage from '@/components/firstPage/index.js';
 // import welcomePage from '@/components/welcomePage/index.js';
 // import checkout from '@/components/checkout/checkout1/index.js';
@@ -15,17 +15,17 @@ import El from '@/library/index.js';
 // import { settingSwipper } from '@/components/slider/swiper/index';
 // import shoeCart from '@/components/cartFunc/shoe cart/index';
 // import counter from '@/components/cartFunc/counter/index';
-import cart from '@/components/cartFunc/cart/index';
+// import cart from '@/components/cartFunc/cart/index';
 // import { slider } from '@/components/slider/buttonSet/index.js';
+// import myOrder from '@/components/myOrder/index';
+// import cart from '@/components/cartFunc/cart/index.js';
 const App = () => {
   const app = El({
     element: 'div',
     id: 'route',
-    child: [cart()],
+    // child: [homePage()],
   });
-  // settingSwipper();
   return app;
 };
 
 export default App;
-// settingSwipper();

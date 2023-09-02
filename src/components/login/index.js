@@ -1,6 +1,11 @@
 import El from '@/library/index.js';
+// import routerFunction from '@/router/index.js';
+// import publicAxios from '@/instance/axiosPublic';
+import routerFunction from '@/router/index.js';
+
+import checkData from '@/functions/checkuserData/index';
 import Cookies from 'js-cookie';
-// import routerFunction from '@/router/index';
+
 const login = () => {
   return El({
     element: 'div',
@@ -8,8 +13,27 @@ const login = () => {
     className: 'h-screen bg-white flex flex-col justify-around items-center',
     child: [
       El({
+        element: 'div',
+        className: 'w-full pt-5 pl-8',
+        child: El({
+          element: 'button',
+          child: El({
+            element: 'ion-icon',
+            name: 'arrow-back',
+            onclick: goBAckToWelcomePage,
+            // eventListener: [
+            //   {
+            //     event: 'click',
+            //     callback: goBAckToWelcomePage,
+            //   },
+            // ],
+          }),
+        }),
+      }),
+
+      El({
         element: 'img',
-        src: './img/logo/logo2.svg',
+        src: 'http://localhost:5173/img/logo/logo2.svg',
       }),
 
       El({
@@ -72,7 +96,14 @@ const login = () => {
                   }),
                   El({
                     element: 'ion-icon',
+                    id: 'password-icon',
                     onclick: showPassword,
+                    // eventListener: [
+                    //   {
+                    //     event: 'click',
+                    //     callback: showPassword,
+                    //   },
+                    // ],
                     name: 'eye-off',
                     className: 'absolute right-4 top-3 text-gray-500',
                   }),
@@ -101,6 +132,13 @@ const login = () => {
                   }),
                 ],
               }),
+              El({
+                element: 'span',
+                id: 'error-input',
+                className:
+                  'hidden flex justify-center items-center text-red-500 text-xl',
+                child: 'Wrong Email or Password',
+              }),
             ],
           }),
           El({
@@ -113,6 +151,11 @@ const login = () => {
                 value: 'Sign In',
                 className:
                   'text-white bg-gray-400 active:bg-black py-2 w-[90%] rounded-full',
+                onclick: () => {
+                  const email = document.getElementById('email');
+                  const password = document.getElementById('password');
+                  checkData(email.value, password.value);
+                },
               }),
             ],
           }),
@@ -160,92 +203,44 @@ const validation = (e) => {
   }
   return status;
 };
-window.onload = function () {
-  const email = Cookies.get('email');
-  const password = Cookies.get('password');
-  if (email !== undefined && password !== undefined) {
-    document.getElementById('email').value = email;
-    document.getElementById('password').value = password;
-    document.getElementById('rememberMe').checked = true;
-  }
-};
+// window.onload = function () {
+//   const email = document.getElementById('email');
+//   const password = document.getElementById('password');
+//   const rememberMe = document.getElementById('rememberMe');
+//   const Email = Cookies.get('email');
+//   const Password = Cookies.get('password');
+//   if (Email !== undefined && Password !== undefined) {
+//     email.value = Email;
+//     password.value = Password;
+//     rememberMe.checked = true;
+//   }
+// };
 /// /show password
-function showPassword() {
+const showPassword = () => {
   const passwordField = document.getElementById('password');
-  if (passwordField.type === 'password') {
-    passwordField.type = 'text';
-  } else {
-    passwordField.type = 'password';
-  }
-}
+  const passwordIcon = document.getElementById('password-icon');
+  const passwordType =
+    passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordField.setAttribute('type', passwordType);
+  passwordIcon.setAttribute(
+    'name',
+    passwordType === 'password' ? 'eye-off' : 'eye'
+  );
+};
+
+/// handling backward button
+const goBAckToWelcomePage = () => {
+  routerFunction().navigate('/welcomePage');
+};
+// function showPassword() {
+//   const passwordField = document.getElementById('password');
+//   if (passwordField.type === 'password') {
+//     passwordField.type = 'text';
+//   } else {
+//     passwordField.type = 'password';
+//   }
+// }
 
 /// changing route
 
 // routerFunction().navigate('/login');
-
-// export const validation = (e) => {
-//   e.preventDefault();
-//   isValidEmail();
-//   // const email = document.formLogin.Email.value;
-//   const password = document.formLogin.Pass.value;
-//   let status = false;
-//   if (password.length < 4 || password.value === '') {
-//     document.getElementById('pass-span').classList.remove('hidden');
-//     document.getElementById('pass-span').innerHTML =
-//       'password must be atleast 4 character';
-//     status = false;
-//   } else {
-//     document.getElementById('pass-span').innerHTML = 'correct';
-//     status = true;
-//   }
-//   return status;
-// };
-// const form = document.createElement('form-login');
-// const email = document.getElementById('email');
-// const password = document.getElementById('password');
-// const validation = (e) => {
-//   e.preventDefault();
-//   validateInputs();
-// };
-// const setError = (element, message) => {
-//   const inputControl = element.parentElement;
-//   const errorDisplay = inputControl.querySelector('.error');
-
-//   errorDisplay.innerText = message;
-//   inputControl.classList.add('error');
-//   inputControl.classList.remove('success');
-// };
-// const setSuccess = (element) => {
-//   const inputControl = element.parentElement;
-//   const errorDisplay = inputControl.querySelector('.error');
-
-//   errorDisplay.innerText = '';
-//   inputControl.classList.add('success');
-//   inputControl.classList.remove('error');
-// };
-
-// const isValidEmail = (email) => {
-//   const re =
-//     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   return re.test(String(email).toLowerCase());
-// };
-
-// const validateInputs = () => {
-//   const emailValue = email.value.trim();
-//   const passwordValue = password.value.trim();
-
-//   if (emailValue === '') {
-//     setError(email, 'Email is required');
-//   } else if (!isValidEmail(emailValue)) {
-//     setError(email, 'Provide a valid email address');
-//   } else {
-//     setSuccess(email);
-//   }
-//   if (passwordValue === '') {
-//     setError(password, 'Password is required');
-//   } else if (passwordValue.length < 4) {
-//     setError(password, 'Password must be at least 4 character.');
-//   } else {
-//     setSuccess(password);
-//   }
-// };

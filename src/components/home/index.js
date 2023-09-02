@@ -1,6 +1,12 @@
 import El from '@/library/index.js';
 import filterBrands from '@/components/home/filter/index';
 import footer from '@/components/home/footer/index';
+import shoes from '@/components/home/shoes/index.js';
+import routerFunction from '@/router';
+// import axios from 'axios';
+import publicAxios from '@/instance/axiosPublic';
+import searchFunction from '@/functions/search/searchFunction/index';
+import showSearchHistory from '@/functions/search/showSearchHistory/index';
 
 // assign brands
 const brands = [
@@ -9,7 +15,7 @@ const brands = [
   'puma',
   'asics',
   'reebok',
-  'new Ba..',
+  'newblanc',
   'converse',
   'more..',
 ];
@@ -24,12 +30,26 @@ const brands = [
 //     { name: 'person-outline', text: 'Profile' },
 //   ];
 const homePage = () => {
+  const cards = El({
+    element: 'div',
+    id: 'home-filter',
+    className: 'flex flex-wrap justify-center items-center p-4',
+  });
+  publicAxios.get('/products').then((res) => {
+    cards.append(
+      ...res.data.map((item) => {
+        return shoes(item);
+      })
+    );
+  });
   return El({
     element: 'div',
-    className: 'w-full h-full flex flex-col justify-between gap-10',
+    className: 'w-full h-full flex flex-col justify-between gap-4',
     child: [
       El({
         element: 'div',
+        className: 'relative',
+        id: 'home-container',
         child: [
           // navbar
           El({
@@ -110,6 +130,13 @@ const homePage = () => {
                 placeholder: 'Search',
                 className:
                   'py-2 w-full pl-10 bg-slate-50 placeholder:text-slate-300 text-slate-500 rounded border-none focus:ring-gray-400',
+                onkeyup: (e) => {
+                  searchFunction(e);
+                },
+                onfocus: () => {
+                  console.log('ss');
+                  showSearchHistory();
+                },
               }),
               El({
                 element: 'ion-icon',
@@ -127,9 +154,19 @@ const homePage = () => {
               El({
                 element: 'div',
                 className: 'flex flex-col items-center',
+                onclick: () => {
+                  routerFunction().navigate(`/products/${brand}`);
+                },
                 child: [
                   El({
                     element: 'button',
+                    // onclick: () => {
+                    //   console.log(brand);
+                    //   routerFunction().navigate(`/${brand}`);
+                    //   publicAxios
+                    //     .get(`/products?brand=${brand}`)
+                    //     .then((data) => console.log(data));
+                    // },
                     className:
                       'w-16 h-16 bg-gray-200 rounded-full flex justify-center items-center mb-4',
                     child: El({
@@ -152,10 +189,16 @@ const homePage = () => {
           }),
         ],
       }),
+      /// shoes
 
+      El({
+        element: 'div',
+        child: [cards],
+      }),
       // footer items
       El({
         element: 'div',
+        className: 'fixed bottom-[0px] left-[30px] bg-white',
         child: [footer()],
       }),
     ],

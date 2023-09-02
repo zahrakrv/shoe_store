@@ -1,9 +1,11 @@
 import El from '@/library/index.js';
+import routerFunction from '@/router/index';
 
 const welcomePage = () => {
   return El({
     element: 'div',
     className: 'relative h-screen',
+    onclick: changeToSlider,
     child: [
       El({
         element: 'img',
@@ -18,13 +20,14 @@ const welcomePage = () => {
       El({
         element: 'p',
         child: '👋 Welcome to ',
-        className: 'text-3xl absolute text-white z-20 left-6 bottom-40',
+        className:
+          'text-4xl absolute text-white z-20 left-6 bottom-40 mb-[5rem]',
       }),
       El({
         element: 'h2',
         child: 'Shoea',
         className:
-          'text-5xl absolute text-white font-bold bottom-24 left-6 text-lg',
+          'text-7xl absolute text-white font-bold bottom-24 left-6 text-lg mb-[3rem]',
       }),
       El({
         element: 'p',
@@ -37,6 +40,9 @@ const welcomePage = () => {
   });
 };
 
+function changeToSlider() {
+  routerFunction().navigate('./slider');
+}
 export default welcomePage;
 
 // child: El({

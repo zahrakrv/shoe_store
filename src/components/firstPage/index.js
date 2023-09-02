@@ -1,9 +1,11 @@
 import El from '@/library/index.js';
+import routerFunction from '@/router';
 
 const firstPage = () => {
   return El({
     element: 'div',
     id: 'first-page',
+    onclick: changeToWelcome,
     child: [
       El({
         element: 'div',
@@ -31,3 +33,7 @@ const firstPage = () => {
 };
 // export const firstload = document.getElementById('first-page');
 export default firstPage;
+
+function changeToWelcome() {
+  routerFunction().navigate('./welcomePage');
+}

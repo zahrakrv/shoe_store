@@ -1,4 +1,6 @@
 import El from '@/library/index.js';
+import footer from '@/components/home/footer/index';
+import routerFunction from '@/router';
 const checkout = () => {
   return El({
     element: 'div',
@@ -16,6 +18,9 @@ const checkout = () => {
                 element: 'ion-icon',
                 name: 'arrow-back',
                 className: 'text-3xl',
+                onclick: () => {
+                  routerFunction().navigate('/cart');
+                },
               }),
               El({
                 element: 'h1',
@@ -89,6 +94,9 @@ const checkout = () => {
             element: 'ion-icon',
             name: 'pencil',
             className: 'text-3xl',
+            onclick: () => {
+              routerFunction().navigate('/address');
+            },
           }),
         ],
       }),
@@ -317,6 +325,9 @@ const checkout = () => {
       }),
       El({
         element: 'div',
+        onclick: () => {
+          routerFunction().navigate('/chooseShipping');
+        },
         className:
           'flex items-center justify-between text-left p-4 shadow-md rounded',
         child: [
@@ -377,7 +388,7 @@ const checkout = () => {
       }),
       El({
         element: 'div',
-        className: 'p-4 shadow-md rounded mb-10',
+        className: 'p-4 shadow-md rounded mb-10 mt-6',
         child: [
           El({
             element: 'div',
@@ -438,7 +449,7 @@ const checkout = () => {
         child: [
           El({
             element: 'button',
-            className: ' bg-black rounded-full w-full py-6',
+            className: ' bg-black rounded-full w-full py-6 mb-20',
             child: [
               El({
                 element: 'div',
@@ -448,6 +459,9 @@ const checkout = () => {
                     element: 'p',
                     className: 'self-center text-xl font-bold',
                     child: 'Continue to Payment',
+                    onclick: () => {
+                      routerFunction().navigate('/payment');
+                    },
                   }),
                   El({
                     element: 'ion-icon',
@@ -459,6 +473,11 @@ const checkout = () => {
             ],
           }),
         ],
+      }),
+      El({
+        element: 'div',
+        child: footer(),
+        className: 'bg-white bottom-0 fixed mb-0 w-full h-24 font-light',
       }),
     ],
   });

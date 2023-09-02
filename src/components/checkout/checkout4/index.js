@@ -1,4 +1,6 @@
 import El from '@/library/index.js';
+import routerFunction from '@/router';
+
 const payment = () => {
   return El({
     element: 'div',
@@ -16,6 +18,9 @@ const payment = () => {
                 element: 'ion-icon',
                 name: 'arrow-back',
                 className: 'text-3xl',
+                onclick: () => {
+                  routerFunction().navigate('/checkout');
+                },
               }),
               El({
                 element: 'h1',
@@ -269,6 +274,9 @@ const payment = () => {
                     element: 'p',
                     className: 'self-center text-lg font-bold',
                     child: 'Confirm Payment',
+                    onclick: () => {
+                      routerFunction().navigate('/confirmation');
+                    },
                   }),
                 ],
               }),
